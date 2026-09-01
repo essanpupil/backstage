@@ -143,7 +143,7 @@ integrations:
     #   apiBaseUrl: https://ghe.example.net/api/v3
     #   token: ${GHE_TOKEN}
 
-proxy:
+proxy: {}
   ### Example for how to add a proxy endpoint for the frontend.
   ### A typical reason to do this is to handle HTTPS and CORS for internal services.
   # endpoints:
@@ -163,7 +163,13 @@ techdocs:
     type: 'local' # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
 
 auth:
+  environment: development
   # see https://backstage.io/docs/auth/ to learn about auth providers
+  session:
+    secret: "secret-sesseionadfsljuser;ogjresfo;sre;jo"
+  cookie:
+    secure: false
+    sameSite: lax
   providers:
     # See https://backstage.io/docs/auth/guest/provider
     # guest: {}
@@ -190,7 +196,7 @@ auth:
     #   - 'http://localhost:*'
     #   - 'https://*.example.com/*'
 
-scaffolder:
+scaffolder: {}
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
 
 catalog:
@@ -201,7 +207,7 @@ catalog:
         loginRealm: jagatku
         realm: jagatku
         clientId: backstage-jagat
-        clientSecret: UDc8USluJROUS2ekoimR53m7djDVxYneXjy2ad3cNcB9PibKsEx2qv55K3tdcZMFeguKriylDPtvjfb6M9b1XZ
+        clientSecret: "eYFGfaPGvmsc0SPtKe38QJIC1MUcImw8NL4ds871bYpBa8obkEGogdboQyqTSV9qZWhJ9Wj0eG9vy7Ua6uxBQF"
         userQuerySize: 100
         schedule: # Optional (defaults to the configurations below if not provided); same options as in TaskScheduleDefinition
           # supports cron, ISO duration, "human duration" as used in code
@@ -240,7 +246,7 @@ catalog:
     #   rules:
     #     - allow: [User, Group]
 
-kubernetes:
+kubernetes: {}
   # see https://backstage.io/docs/features/kubernetes/configuration for kubernetes configuration options
 
 # see https://backstage.io/docs/permissions/getting-started for more on the permission framework
