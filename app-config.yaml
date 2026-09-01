@@ -166,7 +166,17 @@ auth:
   # see https://backstage.io/docs/auth/ to learn about auth providers
   providers:
     # See https://backstage.io/docs/auth/guest/provider
-    guest: {}
+    # guest: {}
+    keycloak:
+      development:
+        clientId: backstage-jagat
+        clientSecret: UDc8USluJROUS2ekoimR53m7djDVxYneXjy2ad3cNcB9PibKsEx2qv55K3tdcZMFeguKriylDPtvjfb6M9b1XZ
+        baseUrl: "http://keycloak.jagat.local"
+        realm: jagatku
+        signIn:
+          resolvers:
+            # See the module documentation for more resolvers
+            - resolver: preferredUsernameMatchingUserEntityName
   # see https://backstage.io/docs/ai/mcp-actions#client-id-metadata-documents
   # to learn more about client id metadata documents
   clientIdMetadataDocuments:
