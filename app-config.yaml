@@ -204,20 +204,20 @@ scaffolder: {}
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
 
 catalog:
-  # providers:
-    # keycloakOrg:
-    #   default:
-    #     baseUrl: http://keycloak.jagat.local
-    #     loginRealm: jagatku
-    #     realm: jagatku
-    #     clientId: backstage-jagat
-    #     clientSecret: O2Es9to4UGjKME8SNcOhouUPdt635tHhyrP4sCNieh4HRSGMeMRoO4O4SNw2mbLS8yOC5XNiCX55O2hzOeVSoj
-    #     userQuerySize: 100
-    #     schedule: # Optional (defaults to the configurations below if not provided); same options as in TaskScheduleDefinition
+  providers:
+    keycloakOrg:
+      default:
+        baseUrl: "http://keycloak.jagat.local"
+        loginRealm: jagatku
+        realm: jagatku
+        clientId: backstage-jagat
+        clientSecret: O2Es9to4UGjKME8SNcOhouUPdt635tHhyrP4sCNieh4HRSGMeMRoO4O4SNw2mbLS8yOC5XNiCX55O2hzOeVSoj
+        # userQuerySize: 100
+        schedule: # Optional (defaults to the configurations below if not provided); same options as in TaskScheduleDefinition
     #       # supports cron, ISO duration, "human duration" as used in code
-    #       frequency: { minutes: 3 } # Customize this to fit your needs
+          frequency: { minutes: 3 } # Customize this to fit your needs
     #       # supports ISO duration, "human duration" as used in code
-    #       timeout: { minutes: 3 } # Customize this to fit your needs
+          timeout: { minutes: 3 } # Customize this to fit your needs
   import:
     entityFilename: catalog-info.yaml
     pullRequestBranchName: backstage-integration
