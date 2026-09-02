@@ -28,18 +28,18 @@ app:
             - url: https://backstage.io/docs
               label: Docs
               icon: docs
-            - url: https://github.com/backstage/backstage
-              label: GitHub
-              icon: github
-            - url: https://github.com/backstage/backstage/blob/master/CONTRIBUTING.md
-              label: Contributing
-              icon: docs
+            # - url: https://github.com/backstage/backstage
+            #   label: GitHub
+            #   icon: github
+            # - url: https://github.com/backstage/backstage/blob/master/CONTRIBUTING.md
+            #   label: Contributing
+            #   icon: docs
             - url: https://backstage.io/plugins
               label: Plugins Directory
               icon: kind:component
-            - url: https://github.com/backstage/backstage/issues/new/choose
-              label: Submit New Issue
-              icon: github
+            # - url: https://github.com/backstage/backstage/issues/new/choose
+            #   label: Submit New Issue
+            #   icon: github
     - home-page-widget:home/world-clock:
         config:
           clockConfigs:
@@ -97,7 +97,7 @@ app:
               height: 4
 
 organization:
-  name: My Company
+  name: Jagat Org
 
 backend:
   # Used for enabling authentication, secret is shared by all backend plugins
@@ -132,12 +132,12 @@ backend:
       - scaffolder
   # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
 
-integrations:
-  github:
-    - host: github.com
+# integrations:
+#   github:
+#     - host: github.com
       # This is a Personal Access Token or PAT from GitHub. You can find out how to generate this token, and more information
       # about setting up the GitHub integration here: https://backstage.io/docs/integrations/github/locations#configuration
-      token: ${GITHUB_TOKEN}
+      # token: ${GITHUB_TOKEN}
     ### Example for how to add your GitHub Enterprise instance using the API:
     # - host: ghe.example.net
     #   apiBaseUrl: https://ghe.example.net/api/v3
@@ -163,6 +163,10 @@ techdocs:
     type: 'local' # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
 
 auth:
+  experimentalExtraAllowedOrigins:
+    - "http://localhost:3000"
+    - "http://localhost:7007"
+
   environment: development
   # see https://backstage.io/docs/auth/ to learn about auth providers
   session:
@@ -176,7 +180,7 @@ auth:
     keycloak:
       development:
         clientId: backstage-jagat
-        clientSecret: UDc8USluJROUS2ekoimR53m7djDVxYneXjy2ad3cNcB9PibKsEx2qv55K3tdcZMFeguKriylDPtvjfb6M9b1XZ
+        clientSecret: O2Es9to4UGjKME8SNcOhouUPdt635tHhyrP4sCNieh4HRSGMeMRoO4O4SNw2mbLS8yOC5XNiCX55O2hzOeVSoj
         baseUrl: "http://keycloak.jagat.local"
         realm: jagatku
         signIn:
@@ -200,20 +204,20 @@ scaffolder: {}
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
 
 catalog:
-  providers:
-    keycloakOrg:
-      default:
-        baseUrl: "http://keycloak.jagat.local"
-        loginRealm: jagatku
-        realm: jagatku
-        clientId: backstage-jagat
-        clientSecret: "eYFGfaPGvmsc0SPtKe38QJIC1MUcImw8NL4ds871bYpBa8obkEGogdboQyqTSV9qZWhJ9Wj0eG9vy7Ua6uxBQF"
-        userQuerySize: 100
-        schedule: # Optional (defaults to the configurations below if not provided); same options as in TaskScheduleDefinition
-          # supports cron, ISO duration, "human duration" as used in code
-          frequency: { minutes: 3 } # Customize this to fit your needs
-          # supports ISO duration, "human duration" as used in code
-          timeout: { minutes: 3 } # Customize this to fit your needs
+  # providers:
+    # keycloakOrg:
+    #   default:
+    #     baseUrl: http://keycloak.jagat.local
+    #     loginRealm: jagatku
+    #     realm: jagatku
+    #     clientId: backstage-jagat
+    #     clientSecret: O2Es9to4UGjKME8SNcOhouUPdt635tHhyrP4sCNieh4HRSGMeMRoO4O4SNw2mbLS8yOC5XNiCX55O2hzOeVSoj
+    #     userQuerySize: 100
+    #     schedule: # Optional (defaults to the configurations below if not provided); same options as in TaskScheduleDefinition
+    #       # supports cron, ISO duration, "human duration" as used in code
+    #       frequency: { minutes: 3 } # Customize this to fit your needs
+    #       # supports ISO duration, "human duration" as used in code
+    #       timeout: { minutes: 3 } # Customize this to fit your needs
   import:
     entityFilename: catalog-info.yaml
     pullRequestBranchName: backstage-integration
@@ -246,7 +250,7 @@ catalog:
     #   rules:
     #     - allow: [User, Group]
 
-kubernetes: {}
+# kubernetes: {}
   # see https://backstage.io/docs/features/kubernetes/configuration for kubernetes configuration options
 
 # see https://backstage.io/docs/permissions/getting-started for more on the permission framework
