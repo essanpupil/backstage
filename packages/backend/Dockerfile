@@ -9,7 +9,7 @@ COPY .yarnrc.yml ./
 COPY packages packages
 
 # Comment this out if you don't have any internal plugins
-COPY plugins plugins
+# COPY plugins plugins
 
 RUN find packages \! -name "package.json" -mindepth 2 -maxdepth 2 -exec rm -rf {} \+
 
@@ -18,11 +18,11 @@ FROM node:24-trixie-slim AS build
 
 # Install sqlite3 dependencies. You can skip this if you don't use sqlite3 in the image,
 # in which case you should also move better-sqlite3 to "devDependencies" in package.json.
-RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-    --mount=type=cache,target=/var/lib/apt,sharing=locked \
-    apt-get update && \
-    apt-get install -y --no-install-recommends libsqlite3-dev && \
-    rm -rf /var/lib/apt/lists/*
+# RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+#     --mount=type=cache,target=/var/lib/apt,sharing=locked \
+#     apt-get update && \
+#     apt-get install -y --no-install-recommends libsqlite3-dev && \
+#     rm -rf /var/lib/apt/lists/*
 
 USER node
 WORKDIR /app
@@ -46,11 +46,11 @@ FROM node:24-trixie-slim
 
 # Install sqlite3 dependencies. You can skip this if you don't use sqlite3 in the image,
 # in which case you should also move better-sqlite3 to "devDependencies" in package.json.
-RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-    --mount=type=cache,target=/var/lib/apt,sharing=locked \
-    apt-get update && \
-    apt-get install -y --no-install-recommends libsqlite3-dev && \
-    rm -rf /var/lib/apt/lists/*
+# RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+#     --mount=type=cache,target=/var/lib/apt,sharing=locked \
+#     apt-get update && \
+#     apt-get install -y --no-install-recommends libsqlite3-dev && \
+#     rm -rf /var/lib/apt/lists/*
 
 # From here on we use the least-privileged `node` user to run the backend.
 USER node
