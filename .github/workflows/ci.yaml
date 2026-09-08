@@ -26,6 +26,11 @@ jobs:
         with:
           node-version: 24
 
+      - name: Install Build Essentials
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential
+
       - name: Install Yarn
         run: npm install -g yarn
 
