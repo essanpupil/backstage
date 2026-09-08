@@ -47,8 +47,10 @@ jobs:
           yarn build:backend
 
       - name: Build backstage docker image
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
         run: |
-          docker image build . -f packages/backend/Dockerfile --tag backstage:latest
+          docker image build . -f packages/backend/Dockerfile --tag $DOCKER_USER/backstage:latest
 
       - name: Authenticate and Push from DinD
         env:
