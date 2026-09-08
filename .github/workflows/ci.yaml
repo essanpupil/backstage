@@ -25,6 +25,14 @@ jobs:
         uses: actions/setup-node@v7.0.0
         with:
           node-version: 24
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      # This separate step handles the caching once Corepack has unblocked Yarn
+      - name: Initialize Yarn Cache
+        uses: actions/setup-node@v7.0.0
+        with:
           cache: 'yarn'
 
       - name: Install Build Essentials
