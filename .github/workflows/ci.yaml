@@ -42,7 +42,7 @@ jobs:
 
       - name: Build backstage docker image
         run: |
-          docker image build . -f packages/backend/Dockerfile --tag backstage
+          docker image build . -f packages/backend/Dockerfile --tag backstage:latest
 
       - name: Authenticate and Push from DinD
         env:
