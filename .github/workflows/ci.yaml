@@ -1,0 +1,62 @@
+name: Backstage CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build
+    runs-on: gha-runner-scale-set
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: 24
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      # This separate step handles the caching once Corepack has unblocked Yarn
+      - name: Initialize Yarn Cache
+        uses: actions/setup-node@v7.0.0
+        with:
+          cache: 'yarn'
+
+      - name: Install Build Essentials
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential
+
+      - name: Build backstage app
+        run: |
+          yarn install --immutable
+          yarn tsc
+          yarn build:backend
+
+      - name: Build backstage docker image
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
+        run: |
+          docker image build . -f packages/backend/Dockerfile --tag $DOCKER_USER/backstage:latest
+
+      - name: Authenticate and Push from DinD
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_TOKEN: ${{ secrets.DOCKER_PAT }}
+        run: |
+          echo "$DOCKER_TOKEN" | docker login --username "$DOCKER_USER" --password-stdin
+          docker push $DOCKER_USER/backstage:latest
+          docker logout
