@@ -49,14 +49,6 @@ jobs:
           DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_TOKEN: ${{ secrets.DOCKER_PAT }}
         run: |
-          # 1. Authenticate the DinD daemon to Docker Hub
           echo "$DOCKER_TOKEN" | docker login --username "$DOCKER_USER" --password-stdin
-          
-          # 2. Build your image
-          docker build -t $DOCKER_USER/my-app:latest .
-          
-          # 3. Push the image to Docker Hub
           docker push $DOCKER_USER/backstage:latest
-          
-          # 4. Clean up credentials (Good practice in DinD environments)
           docker logout
